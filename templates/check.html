@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Exam{% endblock %}
+
+{% block content %}
+    <h2>Exam sheets to be completed: </h2>
+    {% for element in exams %}
+        <a href="/api/examsheets/exam/{{ element.pk }}">Exam sheet number {{ element.pk }}</a><br>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+        <hr>
+        Hi {{ user.username }}!
+        <p><a href="{% url 'logout' %}">logout</a></p>
+        <p><a href="{% url 'password_reset' %}">reset password</a></p>
+    {% else %}
+        <hr>
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">login</a>
+        <a href="{% url 'signup' %}">sign up</a>
+    {% endif %}
+{% endblock %}
